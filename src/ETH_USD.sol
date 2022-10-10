@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "/Users/williamphan/Desktop/Developer/chainlink-price-oracle/lib/chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
 contract PriceConsumerV3 {
     AggregatorV3Interface internal priceFeed;
@@ -24,14 +24,12 @@ contract PriceConsumerV3 {
         (
             ,
             /*uint80 roundID*/
-            int256 price,
+            int256 price, /*uint startedAt*/ /*uint timeStamp*/ /*uint80 answeredInRound*/
             ,
             ,
 
-        ) = /*uint startedAt*/
-            /*uint timeStamp*/
-            /*uint80 answeredInRound*/
-            priceFeed.latestRoundData();
-        return price;
+        ) = priceFeed.latestRoundData();
+        return price / 1e8;
+        // scaled price down by 10^8 to return eth value in dollar amount
     }
 }
